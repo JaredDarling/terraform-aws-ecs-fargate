@@ -74,9 +74,9 @@ module "td" {
 # ECS Service
 #------------------------------------------------------------------------------
 module "ecs-fargate-service" {
-  source  = "cn-terraform/ecs-fargate-service/aws"
-  version = "2.0.39"
-  # source  = "../terraform-aws-ecs-fargate-service"
+  # source  = "cn-terraform/ecs-fargate-service/aws"
+  # version = "2.0.39"
+  source  = "github.com/JaredDarling/terraform-aws-ecs-fargate-service.git?ref=test"
 
   name_prefix = var.name_prefix
   vpc_id      = var.vpc_id
