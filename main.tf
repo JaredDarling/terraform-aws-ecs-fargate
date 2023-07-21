@@ -88,6 +88,7 @@ module "ecs-fargate-service" {
   desired_count                      = var.desired_count
   enable_ecs_managed_tags            = var.enable_ecs_managed_tags
   enable_execute_command             = var.enable_execute_command
+  force_new_deployment               = var.force_new_deployment
   health_check_grace_period_seconds  = var.health_check_grace_period_seconds
   ordered_placement_strategy         = var.ordered_placement_strategy
   placement_constraints              = var.ecs_service_placement_constraints
@@ -115,6 +116,7 @@ module "ecs-fargate-service" {
 
   # Application Load Balancer
   custom_lb_arn                       = var.custom_lb_arn
+  additional_lbs                      = var.additional_lbs
   lb_internal                         = var.lb_internal
   lb_security_groups                  = var.lb_security_groups
   lb_drop_invalid_header_fields       = var.lb_drop_invalid_header_fields
