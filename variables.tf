@@ -27,6 +27,12 @@ variable "vpc_id" {
 #------------------------------------------------------------------------------
 # AWS ECS Container Definition Variables
 #------------------------------------------------------------------------------
+variable "additional_containers" {
+  description = "Additional container definitions (sidecars) to use for the task."
+  default     = []
+  type        = any #cloudposse/ecs-container-definition/aws
+}
+
 variable "container_name" {
   type        = string
   description = "The name of the container. Up to 255 characters ([a-z], [A-Z], [0-9], -, _ allowed)"
@@ -49,7 +55,7 @@ variable "container_memory_reservation" {
   default     = 2048 # 2 GB
 }
 
-variable "container_definition" {
+variable "container_definition_overrides" {
   type        = map(any)
   description = "Container definition overrides which allows for extra keys or overriding existing keys."
   default     = {}
