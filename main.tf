@@ -15,7 +15,8 @@ module "ecs-cluster" {
 #------------------------------------------------------------------------------
 module "td" {
   #  source  = "cn-terraform/ecs-fargate-task-definition/aws"
-  #  version = "1.0.30"
+  #  version = "1.0.35"
+  # source  = "../terraform-aws-ecs-fargate-task-definition"
   source = "github.com/JaredDarling/terraform-aws-ecs-fargate-task-definition.git?ref=test"
 
   additional_containers          = var.additional_containers
@@ -61,11 +62,11 @@ module "td" {
   volumes_from                   = var.volumes_from
   working_directory              = var.working_directory
 
-  ecs_task_execution_role_custom_policies = var.ecs_task_execution_role_custom_policies
-  ephemeral_storage_size                  = var.ephemeral_storage_size
   permissions_boundary                    = var.permissions_boundary
   placement_constraints                   = var.placement_constraints_task_definition
   proxy_configuration                     = var.proxy_configuration
+  ephemeral_storage_size                  = var.ephemeral_storage_size
+  ecs_task_execution_role_custom_policies = var.ecs_task_execution_role_custom_policies
   volumes                                 = var.volumes
 
   tags = var.tags
@@ -82,11 +83,11 @@ module "ecs-fargate-service" {
   name_prefix = var.name_prefix
   vpc_id      = var.vpc_id
 
-  ecs_cluster_arn                    = module.ecs-cluster.aws_ecs_cluster_cluster_arn
+  deployment_controller              = var.deployment_controller
   deployment_maximum_percent         = var.deployment_maximum_percent
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
-  deployment_controller              = var.deployment_controller
   desired_count                      = var.desired_count
+  ecs_cluster_arn                    = module.ecs-cluster.aws_ecs_cluster_cluster_arn
   enable_ecs_managed_tags            = var.enable_ecs_managed_tags
   enable_execute_command             = var.enable_execute_command
   force_new_deployment               = var.force_new_deployment
